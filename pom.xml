@@ -10,6 +10,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>client-service</module>
+        <module>bank-processor</module>
     </modules>
 
     <properties>
