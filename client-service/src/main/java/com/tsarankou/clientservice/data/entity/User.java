@@ -52,17 +52,6 @@ public class User {
             orphanRemoval = true)
     private List<Email> emailList = new ArrayList<>();
 
-
-    public void addPhoneNumber(PhoneNumber phoneNumber) {
-        phoneNumbers.add(phoneNumber);
-        phoneNumber.setUser(this);
-    }
-
-    public void addEmail(Email email) {
-        emailList.add(email);
-        email.setUser(this);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,10 +1,10 @@
 package com.tsarankou.clientservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.NonNull;
 
 import java.time.LocalDate;
 
@@ -25,6 +25,7 @@ public class ClientDto {
     @NotBlank
     private String phoneNumber;
     @NotBlank
+    @Email(message = "{validation.user.email.type}")
     private String email;
     private float deposit;
 
