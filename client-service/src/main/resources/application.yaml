@@ -11,3 +11,10 @@ spring:
     hibernate:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+bank:
+  client:
+    account:
+      scheme: http
+      port: 8081
+      host: bank-processor
+      endpoint: account

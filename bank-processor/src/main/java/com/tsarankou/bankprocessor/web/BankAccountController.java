@@ -1,15 +1,22 @@
 package com.tsarankou.bankprocessor.web;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.tsarankou.bankprocessor.dto.BankAccountDto;
+import com.tsarankou.bankprocessor.dto.IdDto;
+import com.tsarankou.bankprocessor.service.BankAccountService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/account")
+@RequiredArgsConstructor
 public class BankAccountController {
 
-    @GetMapping
-    public String saveNewAccount() {
-        return "response";
+    private final BankAccountService accountService;
+    @PostMapping
+    public IdDto createNewAccount(@RequestBody BankAccountDto accountDto) {
+        return accountService.createNewBankAccount(accountDto);
     }
 }

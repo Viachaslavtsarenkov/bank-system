@@ -11,7 +11,6 @@ services:
       - DATABASE_URL=jdbc:postgresql://client-db:5432/${CLIENT_DB}
     depends_on:
       - client-db
-      - bank-processor
   client-db:
     image: "postgres:16-alpine"
     environment:
@@ -21,6 +20,8 @@ services:
     ports:
       - "7001:5432"
     restart: always
+    depends_on:
+      - bank-processor
   bank-processor:
     build: ./bank-processor
     ports:
@@ -31,7 +32,7 @@ services:
       - DATABASE_PASSWORD=${PASSWORD_DB}
       - DATABASE_URL=jdbc:postgresql://bank-db:5432/${BANK_DB}
     depends_on:
-      - client-db
+      - bank-db
   bank-db:
     image: "postgres:16-alpine"
     environment:

@@ -1,11 +1,13 @@
 package com.tsarankou.clientservice.service.impl;
 
+import com.tsarankou.clientservice.client.BankAccountClient;
 import com.tsarankou.clientservice.data.entity.Email;
 import com.tsarankou.clientservice.data.entity.PhoneNumber;
 import com.tsarankou.clientservice.data.entity.User;
 import com.tsarankou.clientservice.data.repository.EmailRepository;
 import com.tsarankou.clientservice.data.repository.PhoneNumberRepository;
 import com.tsarankou.clientservice.data.repository.UserRepository;
+import com.tsarankou.clientservice.dto.BankAccountDto;
 import com.tsarankou.clientservice.dto.ClientDto;
 import com.tsarankou.clientservice.dto.IdDto;
 import com.tsarankou.clientservice.service.ClientService;
@@ -25,6 +27,7 @@ public class ClientServiceImpl implements ClientService {
     private final UserRepository userRepository;
     private final EmailRepository emailRepository;
     private final PhoneNumberRepository phoneNumberRepository;
+    private final BankAccountClient accountClient;
     @Override
     @Transactional
     public IdDto saveNewClient(ClientDto clientDto) {
@@ -59,12 +62,17 @@ public class ClientServiceImpl implements ClientService {
         user.setPhoneNumbers(List.of(phoneNumber));
         user.setEmailList(List.of(email));
             //todo
-            // create bank account
             // encrypt password
         userRepository.save(user);
         log.info("Created user with id:{}", user.getId());
+
+        BankAccountDto bankAccountDto = new BankAccountDto();
+        bankAccountDto.setDeposit(clientDto.getDeposit());
+        bankAccountDto.setUserId(user.getId());
+        accountClient.createBankAccount(bankAccountDto);
         IdDto response = new IdDto();
         response.setId(user.getId());
+
         return response;
     }
 }

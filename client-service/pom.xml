@@ -16,10 +16,12 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.boot.version>3.1.6</spring.boot.version>
+        <spring.webflux.version>3.1.6</spring.webflux.version>
         <data.jpa.version>3.2.5</data.jpa.version>
         <postgreslq.version>42.3.1</postgreslq.version>
-        <hibernate.version>5.4.1.Final</hibernate.version>
-        <org.slf4j.version>1.5.2</org.slf4j.version>
+        <hibernate.validator.version>8.0.1.Final</hibernate.validator.version>
+        <lombok.version>1.18.32</lombok.version>
+        <spring.boot.test.version>3.2.5</spring.boot.test.version>
     </properties>
     <dependencies>
         <!-- Web -->
@@ -27,7 +29,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring.boot.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <version>3.2.5</version>
         </dependency>
         <!-- Data -->
         <dependency>
@@ -43,26 +56,31 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>8.0.1.Final</version>
+            <version>${hibernate.validator.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>6.4.8.Final</version>
-            <type>pom</type>
-        </dependency>
-        <!-- Annotation processors -->
+        <!-- DEV -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.32</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <version>3.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.21</version>
+            <scope>compile</scope>
         </dependency>
         <!-- Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>3.2.5</version>
+            <version>${spring.boot.test.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -73,9 +91,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <mainClass>com.tsarankou.clientservice.ClientServiceApplication</mainClass>
-                </configuration>
                 <executions>
                     <execution>
                         <goals>
