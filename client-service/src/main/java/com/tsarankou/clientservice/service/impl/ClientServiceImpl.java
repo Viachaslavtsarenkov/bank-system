@@ -31,11 +31,11 @@ public class ClientServiceImpl implements ClientService {
 
         if(phoneNumberRepository.existsPhoneNumberByPhoneIn(List.of(clientDto.getPhoneNumber()))) {
             log.error("Phone number {} already taken", clientDto.getPhoneNumber());
-            throw new DataAlreadyTaken();
+            throw new DataAlreadyTaken("Phone number is already taken:" + clientDto.getPhoneNumber());
         }
         if(emailRepository.existsEmailByEmailIn(List.of(clientDto.getEmail()))) {
             log.error("Email {} already taken", clientDto.getEmail());
-            throw new DataAlreadyTaken("Email is already taken" + clientDto.getEmail());
+            throw new DataAlreadyTaken("Email is already taken:" + clientDto.getEmail());
         }
 
         PhoneNumber phoneNumber = PhoneNumber.builder()

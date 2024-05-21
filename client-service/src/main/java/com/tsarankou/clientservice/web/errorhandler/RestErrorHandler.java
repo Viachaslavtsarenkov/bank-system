@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Controller
-@RestControllerAdvice("org.springframework.web")
+@RestControllerAdvice("com.tsarankou.clientservice.web")
 public class RestErrorHandler {
 
     private static final String SERVER_ERROR = "Server Error";
@@ -25,15 +25,10 @@ public class RestErrorHandler {
     }
 
     @ExceptionHandler
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorDto error(DataAlreadyTaken e) {
-        return new ErrorDto(SERVER_ERROR, e.getMessage());
-    }
-
-    @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorDto error(Exception e) {
-        return new ErrorDto(DATA_ALREADY_TAKEN, SERVER_ERROR_DEFAULT_MESSAGE);
+    public ErrorDto error(DataAlreadyTaken e) {
+        System.out.println("asdfasdfgasdasdghdfhadaddfgadfg===============================");
+        return new ErrorDto(DATA_ALREADY_TAKEN, e.getMessage());
     }
 
 }
