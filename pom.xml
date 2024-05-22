@@ -12,6 +12,7 @@
         <module>client-service</module>
         <module>bank-processor</module>
         <module>service-discovery</module>
+        <module>gateway-service</module>
     </modules>
 
     <properties>

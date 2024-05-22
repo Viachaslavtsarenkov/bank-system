@@ -18,7 +18,5 @@ eureka:
 bank:
   client:
     account:
-      scheme: http
-      port: 8081
-      host: bank-processor
+      id: gateway-service
       endpoint: account

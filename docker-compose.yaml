@@ -4,6 +4,13 @@ services:
     build: ./service-discovery
     ports:
       - "8761:8761"
+  gateway-service:
+    build: ./gateway-service
+    ports:
+      - "7070:8080"
+    environment:
+      - EUREKA_CLIENT_URL=${SERVICE_DISCOVERY_URL}
+    restart: always
   client-service:
     build: ./client-service
     ports:
@@ -30,14 +37,17 @@ services:
       - bank-processor
   bank-processor:
     build: ./bank-processor
-    ports:
-      - "8081:8081"
+    expose:
+      - "8080"
     restart: always
     environment:
       - DATABASE_USER=${USER_DB}
       - DATABASE_PASSWORD=${PASSWORD_DB}
       - DATABASE_URL=jdbc:postgresql://bank-db:5432/${BANK_DB}
       - EUREKA_CLIENT_URL=${SERVICE_DISCOVERY_URL}
+    deploy:
+      mode: replicated
+      replicas: 2
     depends_on:
       - bank-db
       - service-discovery
