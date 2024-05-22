@@ -1,5 +1,9 @@
 version: "3.8"
 services:
+  service-discovery:
+    build: ./service-discovery
+    ports:
+      - "8761:8761"
   client-service:
     build: ./client-service
     ports:
@@ -9,7 +13,9 @@ services:
       - DATABASE_USER=${USER_DB}
       - DATABASE_PASSWORD=${PASSWORD_DB}
       - DATABASE_URL=jdbc:postgresql://client-db:5432/${CLIENT_DB}
+      - EUREKA_CLIENT_URL=${SERVICE_DISCOVERY_URL}
     depends_on:
+      - service-discovery
       - client-db
   client-db:
     image: "postgres:16-alpine"
@@ -31,8 +37,10 @@ services:
       - DATABASE_USER=${USER_DB}
       - DATABASE_PASSWORD=${PASSWORD_DB}
       - DATABASE_URL=jdbc:postgresql://bank-db:5432/${BANK_DB}
+      - EUREKA_CLIENT_URL=${SERVICE_DISCOVERY_URL}
     depends_on:
       - bank-db
+      - service-discovery
   bank-db:
     image: "postgres:16-alpine"
     environment:

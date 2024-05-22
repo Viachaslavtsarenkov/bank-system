@@ -13,4 +13,8 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: 8081
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_URL}
 
