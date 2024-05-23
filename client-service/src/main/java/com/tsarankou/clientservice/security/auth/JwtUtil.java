@@ -17,7 +17,7 @@ public class JwtUtil {
 
 
     private final String secret_key = "mysecretkey";
-    private long accessTokenValidity = 60*60*1000;
+    private long accessTokenValidity = 60*60*100000;
 
     private final JwtParser jwtParser;
 
@@ -29,7 +29,7 @@ public class JwtUtil {
     }
 
     public String createToken(User user) {
-        Claims claims = Jwts.claims().setSubject(user.getEmailList().get(0).getEmail());
+        Claims claims = Jwts.claims().setSubject(user.getLogin());
         claims.put("firstName",user.getSurname());
         claims.put("lastName",user.getName());
         Date tokenCreateTime = new Date();

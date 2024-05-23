@@ -11,11 +11,11 @@ import com.tsarankou.clientservice.dto.BankAccountDto;
 import com.tsarankou.clientservice.dto.ClientDto;
 import com.tsarankou.clientservice.dto.IdDto;
 import com.tsarankou.clientservice.service.ClientService;
-import com.tsarankou.clientservice.service.EncryptionService;
 import com.tsarankou.clientservice.service.UserMapper;
 import com.tsarankou.clientservice.service.exception.DataAlreadyTaken;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +30,8 @@ public class ClientServiceImpl implements ClientService {
     private final EmailRepository emailRepository;
     private final PhoneNumberRepository phoneNumberRepository;
     private final BankAccountClient accountClient;
-    private final EncryptionService encryption;
     private final UserMapper mapper;
+    private final BCryptPasswordEncoder passwordEncoder;
     @Override
     @Transactional
     public IdDto saveNewClient(ClientDto clientDto) {
@@ -54,7 +54,7 @@ public class ClientServiceImpl implements ClientService {
                 .build();
 
         String originalPassword = clientDto.getPassword();
-        String hashedPassword = encryption.digest(originalPassword);
+        String hashedPassword = passwordEncoder.encode(originalPassword);
         clientDto.setPassword(hashedPassword);
         User user = mapper.toEntity(clientDto);
 

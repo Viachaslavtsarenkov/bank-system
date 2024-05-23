@@ -27,7 +27,6 @@ public class RestErrorHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
     public ErrorDto error(DataAlreadyTaken e) {
-        System.out.println("asdfasdfgasdasdghdfhadaddfgadfg===============================");
         return new ErrorDto(DATA_ALREADY_TAKEN, e.getMessage());
     }
 

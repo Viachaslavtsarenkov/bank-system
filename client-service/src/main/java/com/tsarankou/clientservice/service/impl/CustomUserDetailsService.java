@@ -19,8 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         User authorizedUser = userRepository.findUserByLogin(username);
         UserDetails userDetails =
                 org.springframework.security.core.userdetails.User.builder()
-                        .username(authorizedUser.getSurname().concat(" ")
-                                .concat(authorizedUser.getName()))
+                        .username(authorizedUser.getSurname())
                         .password(authorizedUser.getPassword())
                         .build();
         return userDetails;

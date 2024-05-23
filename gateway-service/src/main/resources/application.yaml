@@ -3,6 +3,15 @@ spring:
     name: gateway-service
   main:
     web-application-type: reactive
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: bank-processor
+#        uri: lb://bank-processor
+#        predicates:
+#          - Path=/**
+#          - Host=lb://client-service
+
 eureka:
   client:
     service-url:
