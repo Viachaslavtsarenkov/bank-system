@@ -27,6 +27,8 @@ public class ClientDto {
     @NotBlank
     @Email(message = "{validation.user.email.type}")
     private String email;
+    @NotBlank
+    private String login;
     private float deposit;
 
 }

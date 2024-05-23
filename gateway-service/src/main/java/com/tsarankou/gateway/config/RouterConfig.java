@@ -12,11 +12,11 @@ public class RouterConfig {
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(p -> p
-                        .path("/account/**")
-                        .uri("lb://bank-processor"))
-                .route(p -> p
                         .path("/client/**")
                         .uri("lb://client-service"))
+                .route(p -> p
+                        .path("/account/**")
+                        .uri("lb://bank-processor"))
                 .build();
     }
 }

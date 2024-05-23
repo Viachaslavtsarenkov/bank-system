@@ -44,7 +44,7 @@ public class ClientServiceImpl implements ClientService {
             log.error("Email {} already taken", clientDto.getEmail());
             throw new DataAlreadyTaken("Email is already taken:" + clientDto.getEmail());
         }
-
+        //todo
         PhoneNumber phoneNumber = PhoneNumber.builder()
                 .phone(clientDto.getPhoneNumber())
                 .build();

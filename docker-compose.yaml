@@ -13,8 +13,8 @@ services:
     restart: always
   client-service:
     build: ./client-service
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     restart: always
     environment:
       - DATABASE_USER=${USER_DB}
