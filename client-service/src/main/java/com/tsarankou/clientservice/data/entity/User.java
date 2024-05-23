@@ -39,6 +39,8 @@ public class User {
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateOfBirth;
+    @Column(nullable = false)
+    private String login;
 
     @OneToMany(mappedBy = "user",
             cascade = CascadeType.ALL,

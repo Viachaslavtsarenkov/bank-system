@@ -21,7 +21,7 @@ public class ClientController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public IdDto saveNewClient(@RequestBody ClientDto clientDto) {
-        //todo
+        // todo
         // check validation
         return clientService.saveNewClient(clientDto);
     }
